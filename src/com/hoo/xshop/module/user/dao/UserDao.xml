@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hoo.xshop.module.user.dao.IUserDao">
+	
+	<select id="queryById" resultType="com.hoo.xshop.module.user.entity.UserEntity">
+			SELECT 
+			      id               as "id",
+			      nick_name        as "nickName",
+			      register_resouce as "registerResouce",
+			      resouce_tag      as "resouceTag",
+			      bind_email       as "bindEmail",
+			      bind_phonenum    as "bindPhonenum",
+			      password         as "password",
+			      create_time      as "createTime",
+			      creator_id       as "creatorId"
+		   FROM USER
+		   WHERE id = #{id}
+	</select>
+	
+	<select id="queryByResouceTag" resultType="com.hoo.xshop.module.user.entity.UserEntity">
+			SELECT 
+			      id               as "id",
+			      nick_name        as "nickName",
+			      register_resouce as "registerResouce",
+			      resouce_tag      as "resouceTag",
+			      bind_email       as "bindEmail",
+			      bind_phonenum    as "bindPhonenum",
+			      password         as "password",
+			      create_time      as "createTime",
+			      creator_id       as "creatorId"
+		   FROM USER
+		   WHERE resouce_tag = #{resouceTag} 
+		   AND  register_resouce = #{registerResouce}
+	</select>
+	
+	<select id="queryLtPage" resultType="com.hoo.xshop.module.user.model.UserModel">
+			SELECT 
+			      id               as "id",
+			      nick_name        as "nickName",
+			      register_resouce as "registerResouce",
+			      resouce_tag      as "resouceTag",
+			      bind_email       as "bindEmail",
+			      bind_phonenum    as "bindPhonenum",
+			      password         as "password",
+			      create_time      as "createTime",
+			      creator_id       as "creatorId"
+		   FROM USER
+		   <if test="t.id != null">
+           	WHERE id = #{t.id}
+	       </if>
+	       <if test="t.id == null">
+	        	<where>
+	        	        1 = 1
+		        	<if test="t.registerResouce != null">
+		        		AND register_resouce = #{t.registerResouce}
+		        	</if>
+		        	<if test="t.resouceTag != null">
+		        		AND resouce_tag = #{t.resouceTag}
+		        	</if>
+		        	<if test="t.nickName != null">
+		        		AND nick_name LIKE '%${t.nickName}%'
+		        	</if>
+		        	
+		        </where>
+	        </if>
+	        ORDER BY create_time
+	</select>
+	
+</mapper>

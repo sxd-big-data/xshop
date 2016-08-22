@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+		<servlet-name>springMVC</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+				/WEB-INF/spring-config/applicationContext.xml
+				/WEB-INF/spring-config/use/*.xml
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springMVC</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<!-- UTF-8编码过滤 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	
+	<!-- mvc访问过滤器 -->
+	<!--
+	<filter>
+	    <filter-name>mvcFilter</filter-name>
+	    <filter-class>com.hoo.company.base.filter.MVCFilter</filter-class>
+	    <init-param>
+	        <param-name>unloginRequests</param-name>
+	        <param-value>
+	            {
+	            	"commonRPC":["login","register","logout","getUser"]
+	            }
+	        </param-value>
+	    </init-param>
+	</filter>
+	<filter-mapping>
+	    <filter-name>mvcFilter</filter-name>
+	    <url-pattern>/controller/extcore</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+	    <filter-name>mvcFilter</filter-name>
+	    <url-pattern>/controller/core_batch</url-pattern>
+	</filter-mapping>
+	
+	<servlet>
+		<description>用于资源的访问</description>
+		<display-name>资源访问服务</display-name>
+		<servlet-name>FileAccessServlet</servlet-name>
+		<servlet-class>com.hoo.company.ddn.servlet.FileAccessServlet</servlet-class>
+		<init-param>
+			<param-name>root</param-name>
+			<param-value>C:/Ddn/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>div</param-name>
+			<param-value>upload_file/</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>FileAccessServlet</servlet-name>
+		<url-pattern>/FileAccessServlet.do</url-pattern>
+	</servlet-mapping>
+  
+   <servlet>
+		<description>上传servlet</description>
+		<servlet-name>UploadServelt</servlet-name>
+		<servlet-class>com.hoo.company.ddn.servlet.UploadServlet</servlet-class>
+		<init-param>
+			<param-name>maxLength</param-name>
+			<param-value>50</param-value>
+		</init-param>
+		<init-param>
+			<param-name>filePath</param-name>
+			<param-value>C:/Ddn/upload_file/</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>UploadServelt</servlet-name>
+		<url-pattern>/servlet/upload</url-pattern>
+	</servlet-mapping>
+-->
+</web-app>

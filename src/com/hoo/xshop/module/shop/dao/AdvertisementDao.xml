@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hoo.xshop.module.shop.dao.IAdvertisementDao">
+	
+	<select id="queryLtPage" resultType="com.hoo.xshop.module.shop.model.AdvertisementModel">
+		  SELECT
+				id      as "id",
+			  title   as "title",
+			  img_src as "imgSrc",
+			  url     as "url"
+		  FROM advertisement
+		  ORDER BY create_time desc
+	</select>
+
+</mapper>

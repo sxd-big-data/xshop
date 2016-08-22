@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hoo.xshop.module.shop.dao.IGoodsDao">
+
+	<select id="queryLt" resultType="com.hoo.xshop.module.shop.model.GoodsModel">
+		 SELECT 
+			 g.id          as "id",
+			 title         as "title",
+			 description   as "description",
+			 img_src       as "imgSrc",
+			 selling_price as "sellingPrice",
+		     gc.name       as "goodsCategoryName"
+			 FROM GOODS g
+		LEFT JOIN GOODS_CATEGORY gc
+		ON goods_category_id = gc.ID
+		<where>
+			1=1
+			<if test="goodsCategoryId!=null">
+				AND  goods_category_id = #{goodsCategoryId}
+			</if>
+		</where>
+	</select>
+	
+	<select id="queryT" resultType="com.hoo.xshop.module.shop.model.GoodsModel">
+		 SELECT 
+			 g.id          as "id",
+			 title         as "title",
+			 description   as "description",
+			 img_src       as "imgSrc",
+			 selling_price as "sellingPrice",
+		     gc.name       as "goodsCategoryName"
+			 FROM GOODS g
+		LEFT JOIN GOODS_CATEGORY gc
+		ON goods_category_id = gc.ID
+		WHERE g.id = #{id}
+	</select>
+	
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hoo.xshop.module.user.dao.IShippingAddrDao">
+	
+	<select id="queryLt" resultType="com.hoo.xshop.module.user.model.ShippingAddrModel">
+		  SELECT 
+			id       as "id",
+			receiver as "receiver",
+			address  as "address",
+			detail_addr as "detailAddr",
+			contacts as "contacts",
+			zip_code as "zipCode"    
+		  FROM SHIPPING_ADDR
+		  WHERE
+		    creator_id = #{creatorId} 
+	</select>
+	
+	 <select id="getCount" resultType="java.lang.Integer">
+    	  SELECT COUNT(ID)
+    	  FROM SHIPPING_ADDR
+    	  WHERE
+		    creator_id = #{creatorId} 
+     </select>
+     
+     <select id="queryT" resultType="com.hoo.xshop.module.user.model.ShippingAddrModel">
+		  SELECT 
+			id       as "id",
+			receiver as "receiver",
+			address  as "address",
+			detail_addr as "detailAddr",
+			contacts as "contacts",
+			zip_code as "zipCode"    
+		  FROM SHIPPING_ADDR
+		  WHERE
+		    id = #{id} 
+	</select>
+</mapper>

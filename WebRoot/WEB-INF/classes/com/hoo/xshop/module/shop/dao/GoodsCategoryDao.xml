@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hoo.xshop.module.shop.dao.IGoodsCategoryDao">
+	
+	<select id="queryLt" resultType="com.hoo.xshop.module.shop.entity.GoodsCategoryEntity">
+		   SELECT 
+			     id        as "id",
+			     name      as "name",
+			     parent_id as "parentId",
+			     code      as "code"
+		   FROM GOODS_CATEGORY
+		   <if test="t.id != null">
+           	WHERE id = #{t.id}
+	       </if>
+	       <if test="t.id == null">
+	        	<where>
+	        	    1 = 1
+		        	<if test="t.code != null">
+		        		AND code LIKE '%${t.code}'
+		        	</if>
+		        	<if test="t.name != null">
+		        		AND code LIKE '%${t.name}%'
+		        	</if>
+		        	<if test="t.parentId != null">
+		        		AND parent_id = #{t.parentId}
+		        	</if>
+		        </where>
+	        </if>
+	        ORDER BY code
+	</select>
+	
+	<select id="queryT" resultType="com.hoo.xshop.module.shop.entity.GoodsCategoryEntity">
+		   SELECT 
+			     id        as "id",
+			     name      as "name",
+			     parent_id as "parentId",
+			     code      as "code"
+		   FROM GOODS_CATEGORY
+           WHERE id = #{id}
+	</select>
+	
+</mapper>

@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>用户的增删查改</title>
+</head>
+
+<script type="text/javascript" src="../../v1/res/lib/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+	var postMvc = function(server,method,params){
+		if(typeof params === 'undefined' || params == null){
+			params = [];
+		}
+		if(!(params instanceof Array)){ params = [params];}
+		$.ajax({
+			dataType : 'json'
+			,type : 'POST'
+			,url  : 'http://192.168.2.113:8080/XShop/controller/rpc'
+			,data : {
+				 server : server
+				,method : method
+				,params : JSON.stringify(params)
+			}
+			,error : function(){
+				console.log(arguments);
+			}
+			,success:function(){
+				console.log(arguments);
+			}
+		});
+	}
+	
+	
+	$(function(){
+		//list
+		postMvc('userRpc','queryLtPage',[{limit:2},{
+			nickName:'韩'
+		}]);
+		
+		$('form[data-type="add"]').find('input[type="button"]').click(function(){
+			postMvc("userRpc","add",[{
+				nickName : ($('form[data-type="add"]').find('input[name="nickName"]').val() || '测试'),
+				password : ($('form[data-type="add"]').find('input[name="password"]').val() || '123456')
+			}]);
+		});
+		
+		$('form[data-type="update"]').find('input[type="button"]').click(function(){
+			postMvc("userRpc","update",[{
+				id       : "b6d3137d644949e19d04bf328db60eef",
+				nickName : ($('form[data-type="update"]').find('input[name="nickName"]').val() || '测试'),
+				bindEmail: ($('form[data-type="update"]').find('input[name="bindEmail"]').val() || '123456@qq.com'),
+				bindPhonenum : ($('form[data-type="update"]').find('input[name="bindPhonenum"]').val() || '15286819432')
+			}]);
+		});
+		
+		$('form[data-type="updatePwd"]').find('input[type="button"]').click(function(){
+			postMvc("userRpc","changePwd",[
+				($('form[data-type="updatePwd"]').find('input[name="oldPwd"]').val() || '123456'),
+				($('form[data-type="updatePwd"]').find('input[name="newPwd"]').val() || '654321')]);
+		});
+		
+		
+		postMvc('userRpc','queryLtAddrs',[]);
+		
+		$('form[data-type="add-shipping-addr"]').find('input[type="button"]').click(function(){
+			var values = {};
+			$('form[data-type="add-shipping-addr"]').find('input[type="text"]').each(function(){
+				values[$(this).attr('name')] = $(this).val();
+			});
+			postMvc("userRpc","addAddr",values);
+				
+		});
+	});
+</script>
+
+<body>
+	<label>新增：</label> 
+	<form data-type="add">
+		<input name="nickName" />
+		<input name="password" />
+		<input type="button" value="提交">
+	</form>
+	
+	<label>列表:</label>
+	<ul id="list">
+		
+	</ul>
+	
+	<label>修改：</label>
+	<form data-type="update">
+		<input name="id" type="hidden" />
+		<input name="nickName" />
+		<input name="bindEmail" />
+		<input name="bindPhonenum" />
+		<input type="button" value="提交">
+	</form>
+	
+	<label>修改密码(自能自己改?)：</label>
+	<form data-type="updatePwd">
+		<input name="oldPwd" />
+		<input name="newPwd" />
+		<input type="button" value="提交">
+	</form>
+	
+	<label>添加收货人地址：</label>
+	<form data-type="add-shipping-addr">
+		<input name="receiver" type="text" value="张三疯"/>
+		<input name="address" type="text" readonly="readonly" value="上海市 上海市 闵行区"/>
+		<input name="detailAddr" type="text" value="333弄"/>
+		<input name="contacts" type="text" value="15901276887"/>
+		<input name="zipCode" type="text" value="200000"/>
+		<input type="button" value="提交">
+	</form>
+	
+</body>
+</html>
