@@ -104,12 +104,16 @@ Hoo.define('Page.index.IndexMain',{
 								tab.find('.commodity-item a').bind('click',function(){
 									Hoo.Application.switchTo('goodsDetail',{goodsId:'811a462ffa4e493c8f79510d407a869f'});
 								});
+							}else if(index == 2){
+								tab.find('a[data-id="order-now"]').bind('click',function(){
+									Hoo.Application.switchTo('orderConfirm');
+								});
 							}
 						}
 						//TODO 处理刷新事宜?
 						
 						tab.show();
-						me.fireEvent('beforeshow',me);
+						me.fireEvent('show',me);
 						var scrollTop = parseFloat(tab.attr('data-scrollTop'));
 						if(scrollTop){ 
 							$page.find('div[data-role="page-content"]').scrollTop(scrollTop); 

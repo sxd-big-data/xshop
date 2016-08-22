@@ -247,13 +247,13 @@
 			if(Hoo.util.Object.isEmpty(title)){ return; }
 			//如果是微信平台,这个需要走hack
 			if(document.title == title){ return; }
-			document.title = title;
+			document.title = title;//navigator.userAgent.toLowerCase().indexOf('wechatdevtools') > -1 || (
 			if(Hoo.util.PlatForm.isWechat && Hoo.util.PlatForm.isIOS) {
-				var $body = $('body');
+				//var $body = $('body');
 				var $iframe = $('<iframe src="/favicon.ico"></iframe>').hide();
 				$iframe.on('load', function() {
-					setTimeout(function() { $iframe.off('load').remove(); }, 0);
-				}).appendTo($body);
+					setTimeout(function() { $iframe.off('load').remove(); }, 1);
+				}).appendTo(document.body);
 			}
 		}
 	});

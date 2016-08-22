@@ -16,7 +16,7 @@
 				</a>
 			
 				<div class="goods-infos" style="padding: 0.5em 0 0.5em 0;height: 4.5em;">
-				  <div style="font-size: 15px;color: #1f1f1f;">杜里斯套装 10支/盒</div>
+				  <div style="font-size: 15px;color: #1f1f1f;">杜里斯套装 20支/盒</div>
 				  <div class="price" style="color: orange;font-size: 15px;float: left;">32.8</div>
 				  <del style="margin-left: 10px;color: #ccc;">33.8</del>
 				  <div style="color: #6f6f6f;display: table;">
@@ -51,6 +51,6 @@
 	
 	<aside class="btmNav">
 	 <a>合计：￥0.00</a>
-	 <a href="confirm_order.html" style="background:#64ab5b;color:white;text-shadow:none;">立即下单</a>
+	 <a data-id="order-now" style="background:#64ab5b;color:white;text-shadow:none;">立即下单</a>
 	</aside>
 </div>
